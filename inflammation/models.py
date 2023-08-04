@@ -47,6 +47,14 @@ def daily_mean(data):
     """
     return np.mean(data, axis=0)
 
+def daily_std(data):
+    """
+    Calculate the daily std of a 2d inflammation data array.
+
+    :param data: 2d numpy array
+    :returns: std of data on axis 0
+    """
+    return np.std(data, axis=0)
 
 def daily_max(data):
     """Calculate the daily max of a 2d inflammation data array.
