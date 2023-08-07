@@ -57,7 +57,14 @@ def test_patient_normalise(test, expected, expect_raises):
         npt.assert_almost_equal(patient_normalise(np.array(test)), np.array(expected), decimal=2)
 
 
-
+# Test cases using pytest.mark.parametrize
+@pytest.mark.parametrize("data, patient_num, threshold, expected_result", [
+    ([[10,0], [10,0], [10,0]], 0, 5, 1),
+])
+def test_daily_above_threshold(data, patient_num, threshold, expected_result):
+    from inflammation.models import daily_above_threshold
+    result = daily_above_threshold(np.array(data), patient_num, threshold)
+    assert result == expected_result
 
 @pytest.mark.parametrize(
     "test, expected",

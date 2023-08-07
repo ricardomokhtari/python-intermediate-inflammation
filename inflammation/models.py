@@ -8,7 +8,7 @@ and each column represents a single day across all patients.
 """
 
 import numpy as np
-
+from functools import reduce
 
 def load_csv(filename):
     """Load a Numpy array from a CSV
@@ -38,6 +38,10 @@ def patient_normalise(data):
     normalised[np.isnan(normalised)] = 0
     normalised[normalised < 0] = 0
     return normalised
+
+def daily_above_threshold(data, patient_num, threshold):
+    above_threshold = map(lambda x: x > threshold, data[patient_num])
+    return reduce(lambda a, b: a + 1 if b else a, above_threshold, 0)
 
 def daily_mean(data):
     """Calculate the daily mean of a 2d inflammation data array.
