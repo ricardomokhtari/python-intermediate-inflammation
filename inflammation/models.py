@@ -10,6 +10,21 @@ and each column represents a single day across all patients.
 import numpy as np
 from functools import reduce
 
+def attach_names(data, names):
+    """attach names to data
+    :param data: 2D data
+    :param names: list of names
+    :returns: list of dicts
+
+    """
+    output = []
+
+    for data_row, name in zip(data, names):
+        output.append({'name': name,
+                       'data': data_row})
+
+    return output
+
 def load_csv(filename):
     """Load a Numpy array from a CSV
 
