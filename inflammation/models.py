@@ -10,6 +10,53 @@ and each column represents a single day across all patients.
 import numpy as np
 from functools import reduce
 
+class Observation:
+    def __init__(self, day, value):
+        self.day = day
+        self.value = value
+
+    def __str__(self):
+        return str(self.value)
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return self.name
+
+class Doctor(Person):
+    def __init__(self, name):
+        super().__init__(name)
+        self.patients = []
+
+    def add_patient(self, new_patient):
+        for patient in self.patients:
+            if patient.name == new_patient.name:
+                return
+
+        self.patients.append(new_patient)
+
+class Patient(Person):
+    def __init__(self, name):
+        super().__init__(name)
+        self.observations = []
+
+    def add_observation(self, value, day=None):
+        if day is None:
+            try:
+                day = self.observations[-1]["day"] + 1
+            except:
+                day = 0
+
+        observation = Observation(day, value)
+
+        self.observations.append(observation)
+
+        return observation
+
+
+
 def attach_names(data, names):
     """attach names to data
     :param data: 2D data
