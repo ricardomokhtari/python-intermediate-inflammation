@@ -11,15 +11,20 @@ def visualize(data_dict):
     """
     # TODO(lesson-design) Extend to allow saving figure to file
 
+    # get the number of plots
     num_plots = len(data_dict)
+    # create a figure
     fig = plt.figure(figsize=((3 * num_plots) + 1, 3.0))
 
+    # make the figures
     for i, (name, data) in enumerate(data_dict.items()):
         axes = fig.add_subplot(1, num_plots, i + 1)
 
         axes.set_ylabel(name)
         axes.plot(data)
 
+    # pretty
     fig.tight_layout()
 
+    # show the figure
     plt.show()
